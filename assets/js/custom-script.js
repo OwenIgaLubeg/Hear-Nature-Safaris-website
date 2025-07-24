@@ -21,20 +21,48 @@
 
 	//Update Header Style and Scroll to Top
 	function headerStyle() {
-		if ($('.main-header').length) {
-			var windowpos = $(window).scrollTop();
-			var siteHeader = $('.main-header');
-			var scrollLink = $('.scroll-to-top');
-			if (windowpos >= 1) {
-				siteHeader.addClass('fixed-header');
-				scrollLink.fadeIn(300);
-			} else {
-				siteHeader.removeClass('fixed-header');
-				scrollLink.fadeOut(300);
-			}
-		}
-	}
-	headerStyle();
+      if ($('.main-header').length) {
+        var windowpos = $(window).scrollTop();
+        var siteHeader = $('.main-header');
+        var scrollLink = $('.scroll-to-top');
+        if (windowpos >= 1) {
+          siteHeader.addClass('fixed-header');
+          scrollLink.fadeIn(300);
+        } else {
+          siteHeader.removeClass('fixed-header');
+          scrollLink.fadeOut(300);
+        }
+      }
+    }
+    headerStyle();
+
+    // Preloader hide
+    $(window).on('load', function () {
+      $('.loader-wrap').fadeOut(500);
+    });
+
+    // Mobile menu logic
+    $(document).ready(function () {
+      // Open mobile menu
+      $('.mobile-nav-toggler').on('click', function () {
+        $('.mobile-menu').addClass('active');
+        $('.menu-backdrop').fadeIn();
+      });
+
+      // Close mobile menu
+      $('.mobile-menu .close-btn, .menu-backdrop').on('click', function () {
+        $('.mobile-menu').removeClass('active');
+        $('.menu-backdrop').fadeOut();
+      });
+
+      // Dropdown toggle in mobile
+      $('.mobile-menu .dropdown > a').on('click', function (e) {
+        e.preventDefault();
+        $(this).parent().toggleClass('open').siblings().removeClass('open');
+      });
+    });
+
+
 
 	//Search Toggle
 	if ($('.search-box').length) {
@@ -800,3 +828,7 @@
 		enableDefaultMasonry();
 	});
 })(window.jQuery);
+
+
+
+
